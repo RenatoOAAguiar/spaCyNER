@@ -84,11 +84,19 @@ def main(model_dir=None):
         (
             'O restaurante é próximo daquele lugar no centro?',
             [(len('O restaurante é próximo daquele lugar no '), len('O restaurante é próximo daquele lugar no centro'),'local')]
+        ),
+        (
+            'Onde encontro comida?',
+            [(len('Onde encontro '), len('Onde encontro comida'), 'comida')]
+        ),
+        (
+            'Estou com fome!',
+            [(len('Estou com '), len('EStou com fome'), 'comida')]
         )
     ]
-    ner = train_ner(nlp, train_data, ['local', 'negar'])
+    ner = train_ner(nlp, train_data, ['local', 'negar', 'comida'])
 
-    doc = nlp.make_doc('Onde encontro restaurante no centro e no norte?')
+    doc = nlp.make_doc('Preciso de um restaurante')
     nlp.tagger(doc)
     ner(doc)
     for word in doc:
